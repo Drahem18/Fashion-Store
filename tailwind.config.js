@@ -7,6 +7,17 @@ module.exports = {
   ],
   theme: {
     extend: {
+      flexGrow: {
+        2: "2",
+      },
+      flexGrow: {
+        3: "3",
+      },
+      colors: {
+        primary: "#e5e7eb",
+
+        "black-rgba": "rgba(0, 0, 0, 0.6)",
+      },
       backgroundImage: {
         "gradient-radial": "radial-gradient(var(--tw-gradient-stops))",
         "gradient-conic":
