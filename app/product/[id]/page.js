@@ -29,8 +29,8 @@ export default async function Page({ params }) {
   console.log(data);
 
   return (
-    <div className="flex mt-28 px-28 gap-4">
-      <div className="w-1/2 h-80 relative">
+    <div className="flex flex-col md:flex-row mt-28 md:px-28 px-8 gap-4">
+      <div className="md:w-1/2 w-full h-80 relative flex justify-center">
         <Image
           className="object-contain"
           src={data.image}
