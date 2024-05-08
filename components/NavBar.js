@@ -18,7 +18,11 @@ function NavBar() {
 
   return (
     <>
-      <nav className="bg-white flex items-center justify-end fixed right-0 left-0 -top-1 z-40 px-4 md:px-0 ">
+      <nav
+        className={`${
+          menuOpen ? "bg-black text-white" : "bg-white text-black"
+        } flex items-center justify-end fixed right-0 left-0 -top-1 z-40 px-4 md:px-0 `}
+      >
         <IoIosMenu
           size={25}
           className="mr-4 md:hidden cursor-pointer"
