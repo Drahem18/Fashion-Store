@@ -51,8 +51,11 @@ function Page() {
   }, [cartItems, data]);
 
   return (
-    <div className="mt-36 flex gap-4 px-24">
-      <div className="w-7/12 border-gray-200 rounded-2xl border p-7 px-0">
+    <div className="mt-36 flex flex-col md:flex-row gap-4 px-24">
+      <div className="md:w-7/12 border-gray-200 rounded-2xl border p-7 px-0">
+        {cartItems.length === 0 && (
+          <h3 className="ml-8 text-4xl font-bold ">Cart Is Empty!</h3>
+        )}
         {filteredData ? (
           filteredData.map((item) => {
             const quantity = cartItems.find(
@@ -95,10 +98,10 @@ function Page() {
             );
           })
         ) : (
-          <p>Loading...</p>
+          <></>
         )}
       </div>
-      <div className="w-5/12 border-gray-200 rounded-2xl border p-7 px-0">
+      <div className="md:w-5/12 border-gray-200 rounded-2xl border p-7 px-0">
         <h3 className="ml-8 text-2xl font-bold">Order Summary</h3>
 
         <div className="flex justify-between items-center mt-4">
