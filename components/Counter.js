@@ -19,21 +19,23 @@ function Counter({ id }) {
 
   return (
     <>
-      <div className=" p-4 gap-4 bg-primary rounded-full inline-flex mt-8">
-        <button onClick={handleDecrement} className="text-3xl px-4">
-          -
-        </button>
-        <span className="text-3xl w-3">{counter}</span>
-        <button onClick={handleIncrement} className="text-3xl px-4">
-          +
+      <div className="flex flex-col md:flex-row mt-8 justify-around">
+        <div className=" md:p-4 gap-4 bg-primary rounded-full flex justify-around ">
+          <button onClick={handleDecrement} className="text-3xl px-4">
+            -
+          </button>
+          <span className="text-3xl ">{counter}</span>
+          <button onClick={handleIncrement} className="text-3xl px-4">
+            +
+          </button>
+        </div>
+        <button
+          onClick={handleOnClick}
+          className="  font-bold bg-black py-2 text-white rounded-full md:px-4 md:w-3/5 mt-4 "
+        >
+          Add To Cart
         </button>
       </div>
-      <button
-        onClick={handleOnClick}
-        className=" ml-12 font-bold bg-black text-white rounded-full p-4 w-2/3"
-      >
-        Add To Cart
-      </button>
     </>
   );
 }
