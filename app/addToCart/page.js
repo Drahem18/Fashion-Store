@@ -62,23 +62,26 @@ function Page() {
               (cartItem) => cartItem.id === item.id
             );
             return (
-              <div key={item.id} className="flex mt-8">
-                <div className="w-2/12 h-20 relative">
+              <div
+                key={item.id}
+                className="flex  flex-col md:flex-row mt-8 items-center"
+              >
+                <div className="md:w-2/12 h-20 relative w-full mb-8">
                   <Image
                     src={item.image}
-                    className="card-img"
+                    className="object-contain"
                     alt="image"
                     fill
                     sizes="100%"
                     priority={true}
                   />
                 </div>
-                <div>
+                <div className="pl-4 md:pl-0">
                   <p>{item.title}</p>
                   <p className="mt-3">${item.price}</p>
                 </div>
-                <div className=" flex-1 relative">
-                  <div className=" p-1 gap-4 bg-primary rounded-full inline-flex mt-8 absolute right-8 bottom-2 ">
+                <div className=" md:flex-1 md:relative bottom-0">
+                  <div className=" p-1 gap-4 bg-primary rounded-full inline-flex mt-8 md:absolute md:right-8 md:bottom-2 ">
                     <button
                       onClick={() => handleDecrement(item.id)}
                       className="text-3xl px-4"
