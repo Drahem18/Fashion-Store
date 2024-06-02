@@ -1,6 +1,6 @@
 "use client";
 import Link from "next/link";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { LuShoppingCart } from "react-icons/lu";
 import { IoPersonCircleOutline } from "react-icons/io5";
 import { IoMdSearch } from "react-icons/io";
@@ -11,7 +11,16 @@ import { useShoppingCart } from "@/app/context/ShoppingCartProvider";
 function NavBar() {
   const { cartItems } = useShoppingCart();
   const [menuOpen, setMenuOpen] = useState(false);
-  const width = window.innerWidth;
+  const [windowWidth, setWindowWidth] = useState(0);
+
+  useEffect(() => {
+    const handleResize = () => setWindowWidth(window.innerWidth);
+
+    handleResize();
+    window.addEventListener("resize", handleResize);
+
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
 
   const toggleMenu = () => {
     setMenuOpen((prev) => !prev);
@@ -22,7 +31,7 @@ function NavBar() {
       <nav
         className={`${
           menuOpen ? "bg-black text-white" : "bg-white text-black"
-        } flex items-center justify-end fixed right-0 left-0 -top-1 z-40 px-4 md:px-0 `}
+        } flex items-center justify-end fixed right-0 left-0 top-0 z-40 px-4 md:px-0 `}
       >
         <IoIosMenu
           size={25}
@@ -41,7 +50,7 @@ function NavBar() {
               menuOpen
                 ? "flex flex-col bg-black text-white fixed top-20 left-0 w-full p-4"
                 : "hidden"
-            }`}
+            } md:flex-row md:bg-transparent md:text-inherit`}
           >
             <li className="font-semibold cursor-pointer hover:text-gray-500">
               <div className="categories-content">
@@ -60,9 +69,7 @@ function NavBar() {
                           ? "py-4 text-white"
                           : "px-10 py-4 hover:bg-primary"
                       }`}
-                      onClick={
-                        width < 768 ? () => setMenuOpen((prev) => !prev) : null
-                      }
+                      onClick={windowWidth < 768 ? toggleMenu : null}
                     >
                       Men
                     </div>
@@ -74,9 +81,7 @@ function NavBar() {
                           ? "pt-4 text-white"
                           : "px-10 py-4 hover:bg-primary"
                       }`}
-                      onClick={
-                        width < 768 ? () => setMenuOpen((prev) => !prev) : null
-                      }
+                      onClick={windowWidth < 768 ? toggleMenu : null}
                     >
                       Women
                     </div>
@@ -88,9 +93,7 @@ function NavBar() {
               <Link
                 passHref
                 href={"/onsale"}
-                onClick={
-                  width < 768 ? () => setMenuOpen((prev) => !prev) : null
-                }
+                onClick={windowWidth < 768 ? toggleMenu : null}
               >
                 On Sale
               </Link>
@@ -99,9 +102,7 @@ function NavBar() {
               <Link
                 passHref
                 href={"/newarrival"}
-                onClick={
-                  width < 768 ? () => setMenuOpen((prev) => !prev) : null
-                }
+                onClick={windowWidth < 768 ? toggleMenu : null}
               >
                 New Arrival
               </Link>
@@ -109,7 +110,7 @@ function NavBar() {
           </ul>
           <form
             action="#"
-            className="hidden md:block md:w-2/5 lg:w-1-2 lg:w-1/2 justify-center relative"
+            className="hidden md:block md:w-2/5 lg:w-1/2 justify-center relative"
           >
             <IoMdSearch
               size={25}
@@ -125,9 +126,9 @@ function NavBar() {
             <IoMdSearch size={25} className="md:hidden cursor-pointer" />
 
             <Link href={"../addToCart"}>
-              <span className="position-relative relativee ">
+              <span className="relative">
                 <LuShoppingCart size={25} className="mx-4 cursor-pointer" />
-                <div className="position-absolute -top-4 -left-2 bg-red-600 rounded-full w-6 h-6 cart font-bold flex items-center justify-center text-white">
+                <div className="absolute -top-4 -left-2 bg-red-600 rounded-full w-6 h-6 flex items-center justify-center text-white">
                   {cartItems.length}
                 </div>
               </span>
@@ -138,9 +139,7 @@ function NavBar() {
       </nav>
 
       {menuOpen && (
-        <div className="bg-gray-700 fixed top-24 left-0 w-full p-4">
-          {/* Additional menu items can be placed here */}
-        </div>
+        <div className="bg-gray-700 fixed top-24 left-0 w-full p-4"></div>
       )}
     </>
   );
