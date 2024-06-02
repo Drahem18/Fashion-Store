@@ -11,6 +11,7 @@ import { useShoppingCart } from "@/app/context/ShoppingCartProvider";
 function NavBar() {
   const { cartItems } = useShoppingCart();
   const [menuOpen, setMenuOpen] = useState(false);
+  const width = window.innerWidth;
 
   const toggleMenu = () => {
     setMenuOpen((prev) => !prev);
@@ -59,7 +60,9 @@ function NavBar() {
                           ? "py-4 text-white"
                           : "px-10 py-4 hover:bg-primary"
                       }`}
-                      onClick={() => setMenuOpen((prev) => !prev)}
+                      onClick={
+                        width < 768 ? () => setMenuOpen((prev) => !prev) : null
+                      }
                     >
                       Men
                     </div>
@@ -71,7 +74,9 @@ function NavBar() {
                           ? "pt-4 text-white"
                           : "px-10 py-4 hover:bg-primary"
                       }`}
-                      onClick={() => setMenuOpen((prev) => !prev)}
+                      onClick={
+                        width < 768 ? () => setMenuOpen((prev) => !prev) : null
+                      }
                     >
                       Women
                     </div>
@@ -83,7 +88,9 @@ function NavBar() {
               <Link
                 passHref
                 href={"/onsale"}
-                onClick={() => setMenuOpen((prev) => !prev)}
+                onClick={
+                  width < 768 ? () => setMenuOpen((prev) => !prev) : null
+                }
               >
                 On Sale
               </Link>
@@ -92,7 +99,9 @@ function NavBar() {
               <Link
                 passHref
                 href={"/newarrival"}
-                onClick={() => setMenuOpen((prev) => !prev)}
+                onClick={
+                  width < 768 ? () => setMenuOpen((prev) => !prev) : null
+                }
               >
                 New Arrival
               </Link>
